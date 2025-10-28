@@ -129,24 +129,9 @@ const Home = () => {
       {/* Impact Snapshot */}
       <section className="py-20 bg-emerald-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center">
             <h2 className="text-4xl font-bold mb-4">Our Conservation Impact</h2>
             <p className="text-xl text-emerald-200">Conserving the rich biodiversity and making a difference across Nagaland since 2012</p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12">
-            {impactStats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <div key={index} className="text-center">
-                  <div className="w-16 h-16 bg-emerald-700 rounded-lg flex items-center justify-center mx-auto mb-4">
-                    <Icon className="w-8 h-8 text-emerald-200" />
-                  </div>
-                  <div className="text-4xl font-bold mb-2">{stat.number}</div>
-                  <div className="text-emerald-200">{stat.label}</div>
-                </div>
-              );
-            })}
           </div>
         </div>
       </section>
