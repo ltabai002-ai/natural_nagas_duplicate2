@@ -1,0 +1,1664 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Bird, Trees, GanttChart as Elephant, Users, Award, MapPin, Calendar, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
+
+const Programs = () => {
+  const [expandedProgram, setExpandedProgram] = useState<string | null>(null);
+
+  const toggleExpanded = (programId: string) => {
+    setExpandedProgram(expandedProgram === programId ? null : programId);
+  };
+
+  // Chunglikha Visit Photo Gallery
+  const chunglikhaPhotos = [
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/047ead02b15cae824119ff2fc3cd6a82',
+      title: 'IMG_3238 - Community Meeting Discussion',
+      description: 'Community leaders presenting village statistics and council information'
+    },
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/8e5b3b16bed476c73613db5fcf01097d',
+      title: '_MG_8303 - Village Assembly Hall',
+      description: 'Community members gathered for environmental awareness session'
+    },
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/9e378ef3ee0e45cfc9bb9bdf76b2b1c8',
+      title: '_MG_8378 - Waste Management Initiative',
+      description: 'Traditional basket used for community cleanliness drive'
+    },
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/9ed8edae8aad414b1d8beb94c64288d7',
+      title: '_MG_8322 - Forest Path Inspection',
+      description: 'Team documenting conservation areas and natural pathways'
+    },
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/bb538e85d5e6cceacf378ada55ee82ac',
+      title: '_MG_8354 - Village Area Survey',
+      description: 'Community visit through village areas and green spaces'
+    },
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/b82e7f041821cbfe34bd4df9540651d9',
+      title: 'IMG_3169 - Chunglikha Community Hall',
+      description: 'Group photo at Chunglikha Community Hall with village representatives'
+    }
+  ];
+
+  // Water Table Recharge Photo Gallery
+  const waterTableRechargePhotos = [
+    {
+      url: '/images/water-table-recharge/water_01.jpg',
+      title: 'Water Recharge Project Site',
+      description: 'Community-led water table recharge infrastructure development'
+    },
+    {
+      url: '/images/water-table-recharge/water_02.jpg',
+      title: 'Water Conservation Structure',
+      description: 'Traditional water harvesting and conservation techniques implementation'
+    },
+    {
+      url: '/images/water-table-recharge/water_03.jpg',
+      title: 'Community Water Project',
+      description: 'Village water resource management and sustainable practices'
+    },
+    {
+      url: '/images/water-table-recharge/water_04.jpg',
+      title: 'Water Table Enhancement',
+      description: 'Natural water recharge system construction and monitoring'
+    },
+    {
+      url: '/images/water-table-recharge/water_05.jpg',
+      title: 'Sustainable Water Management',
+      description: 'Community participation in water conservation and recharge activities'
+    },
+    {
+      url: '/images/water-table-recharge/water_06.jpg',
+      title: 'Water Resource Development',
+      description: 'Long-term water security through community-based recharge projects'
+    }
+  ];
+
+  // Activities under Green Dream Project (GDP) Photo Gallery
+  const gdpActivityPhotos = [
+    // Original 14 photos from external URLs
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/e2a29cf6201dc5b33c53127ab2805157',
+      title: 'Traditional Craft Workshop',
+      description: 'Community members learning traditional bamboo weaving and basket making skills'
+    },
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/90d33c5241fd10dac809f0c6e7bbe21f',
+      title: 'Community Group Meeting',
+      description: 'Village representatives gathering for community development discussions'
+    },
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/2cd1bc1dce43c21d8d6dffd034abb3c0',
+      title: 'Women\'s Skill Development Workshop',
+      description: 'Women participating in hands-on training for traditional string and textile crafts'
+    },
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/1990fd4733c8952d244137ed54868652',
+      title: 'Traditional Craft Training Session',
+      description: 'Participants learning beadwork and traditional textile techniques'
+    },
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/c465c159287d35b74334f239eb3167d5',
+      title: 'Community Hall Gathering',
+      description: 'Community members assembled for environmental awareness and development programs'
+    },
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/7e74979930d30bada4d074c0f44385b6',
+      title: 'Youth Team Building Activity',
+      description: 'Energetic group activity promoting community engagement and team spirit'
+    },
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/4cd2bc03cebf72713b8fb5c8c6cf8f6d',
+      title: 'Environmental Training Camp',
+      description: 'Outdoor camping and environmental education session in natural forest setting'
+    },
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/912660a848e57e7f8eea9c9e397e50fa',
+      title: 'Sustainable Camping Workshop',
+      description: 'Community members learning eco-friendly camping and outdoor survival skills'
+    },
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/55421b933fead3eb6e1b873bcb7bfb8a',
+      title: 'Forest Path Maintenance',
+      description: 'Community volunteers clearing and maintaining natural pathways for conservation'
+    },
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/7a3a7658c2b3b96f820d78208f53b23e',
+      title: 'Village Infrastructure Development',
+      description: 'Community project planning for sustainable water conservation and management'
+    },
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/4d5137aa872d23487982753ec14a6342',
+      title: 'Traditional Building Construction',
+      description: 'Community building project using eco-friendly materials and traditional techniques'
+    },
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/329d73a40b29f941753bbe1f2e7b2113',
+      title: 'Community Training Distribution',
+      description: 'Participants receiving materials and instructions for sustainable development activities'
+    },
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/ab470dd430ed6b2b36798fbb60a0fbb2',
+      title: 'Agricultural Support Program',
+      description: 'Community members receiving supplies and training for sustainable farming practices'
+    },
+    {
+      url: 'https://page.gensparksite.com/v1/base64_upload/0f1a9f9c16ef4d138c3ac76c0f813f68',
+      title: 'Traditional Cooking Methods',
+      description: 'Demonstration of eco-friendly cooking practices using traditional wood-fired stoves'
+    },
+    // New 15 photos from Google Drive (downloaded locally)
+    {
+      url: '/images/gdp-activities/photo_01.jpg',
+      title: 'GDP Activity Photo 1',
+      description: 'Community development activity under Green Dream Project initiative'
+    },
+    {
+      url: '/images/gdp-activities/photo_02.jpg',
+      title: 'GDP Activity Photo 2',
+      description: 'Environmental conservation training session with local participants'
+    },
+    {
+      url: '/images/gdp-activities/photo_03.jpg',
+      title: 'GDP Activity Photo 3',
+      description: 'Sustainable development workshop for community empowerment'
+    },
+    {
+      url: '/images/gdp-activities/photo_04.jpg',
+      title: 'GDP Activity Photo 4',
+      description: 'Traditional skills preservation and cultural heritage activities'
+    },
+    {
+      url: '/images/gdp-activities/photo_05.jpg',
+      title: 'GDP Activity Photo 5',
+      description: 'Community engagement and participatory development sessions'
+    },
+    {
+      url: '/images/gdp-activities/photo_06.jpg',
+      title: 'GDP Activity Photo 6',
+      description: 'Environmental awareness and biodiversity conservation programs'
+    },
+    {
+      url: '/images/gdp-activities/photo_07.jpg',
+      title: 'GDP Activity Photo 7',
+      description: 'Village infrastructure development and sustainability projects'
+    },
+    {
+      url: '/images/gdp-activities/photo_08.jpg',
+      title: 'GDP Activity Photo 8',
+      description: 'Capacity building and skill development training programs'
+    },
+    {
+      url: '/images/gdp-activities/photo_09.jpg',
+      title: 'GDP Activity Photo 9',
+      description: 'Community-led conservation initiatives and green practices'
+    },
+    {
+      url: '/images/gdp-activities/photo_10.jpg',
+      title: 'GDP Activity Photo 10',
+      description: 'Collaborative projects for sustainable village development'
+    },
+    {
+      url: '/images/gdp-activities/photo_11.jpg',
+      title: 'GDP Activity Photo 11',
+      description: 'Educational workshops on environmental protection and conservation'
+    },
+    {
+      url: '/images/gdp-activities/photo_12.jpg',
+      title: 'GDP Activity Photo 12',
+      description: 'Traditional knowledge sharing and cultural exchange activities'
+    },
+    {
+      url: '/images/gdp-activities/photo_13.jpg',
+      title: 'GDP Activity Photo 13',
+      description: 'Sustainable agriculture and eco-friendly farming practices demonstration'
+    },
+    {
+      url: '/images/gdp-activities/photo_14.jpg',
+      title: 'GDP Activity Photo 14',
+      description: 'Community mobilization for environmental stewardship and conservation'
+    },
+    {
+      url: '/images/gdp-activities/photo_15.jpg',
+      title: 'GDP Activity Photo 15',
+      description: 'Green village development model implementation and monitoring'
+    }
+  ];
+
+  const flagshipPrograms = [
+    {
+      id: 'green-dream',
+      title: 'Green Dream Project (GDP)',
+      subtitle: 'Model Green Village New Riphyim Initiative',
+      description: 'Green Village New Riphyim with the motto "Of the community, by the community and for the community" was adopted as a model village for disseminating awareness and education about sustainable development and biodiversity conservation. Launched on World Environment Day 2015.',
+      image: '/images/green-dream/main/gdp_main.jpg',
+      impact: ['Model Village Program', 'Water Table Recharge Projects', 'Sustainable Development Focus'],
+      status: 'Ongoing Since 2015',
+      icon: Trees
+    },
+    {
+      id: 'jica-nfmp',
+      title: 'JICA NFMP Project',
+      subtitle: 'Natural Forest Management Project Partnership',
+      description: 'As an organization familiar with the local landscape in Wokha district, Natural Nagas provides experts, logistics and data for this Japan-funded forest management project. We monitor, train and handhold community representatives across 24 villages in 4 batches.',
+      image: '/images/jica-nfmp/main/jica_nfmp_main.jpg',
+      impact: ['24 Villages Across 4 Batches', 'Wokha District Focus', 'Community Training & Monitoring'],
+      status: 'Active Partnership',
+      icon: Trees
+    },
+    {
+      id: 'element',
+      title: 'ELEMENT World Bank Project',
+      subtitle: 'Enhancing Landscape and Ecosystem Management ($225.5M)',
+      description: 'Natural Nagas has officially signed a contract with the Government of Nagaland as part of the ELEMENT Project. We provide expertise, logistics, data, and community training across two Protected Forest Areas (PFAs) in Wokha district covering 23 villages.',
+      image: '/images/element-worldbank/main/element_main.jpg',
+      impact: ['PFA 1: 10 Villages', 'PFA 2: 13 Villages', 'Wokha District Coverage'],
+      status: 'Active Contract',
+      icon: Award
+    }
+  ];
+
+  // Amur Falcon Photo Galleries
+  const amurFalconMouPhotos = [
+    {
+      url: '/images/amur-falcon/mou-signing/mou_01.jpg',
+      title: 'MOU Signing Ceremony',
+      description: 'Historic MOU signing with Pangti village for Amur Falcon conservation'
+    },
+    {
+      url: '/images/amur-falcon/mou-signing/mou_02.jpg',
+      title: 'Community Leaders Agreement',
+      description: 'Village leaders committing to zero hunting policy for Amur Falcons'
+    }
+  ];
+
+  const birdForBirdPhotos = [
+    {
+      url: '/images/amur-falcon/bird-for-bird/bird_01.jpg',
+      title: 'Bird for Bird Initiative',
+      description: 'Community compensation program for falcon conservation'
+    },
+    {
+      url: '/images/amur-falcon/bird-for-bird/bird_02.jpg',
+      title: 'Alternative Livelihood Program',
+      description: 'Providing domestic birds as compensation for hunting cessation'
+    },
+    {
+      url: '/images/amur-falcon/bird-for-bird/bird_03.jpg',
+      title: 'Community Participation',
+      description: 'Villagers actively participating in conservation initiatives'
+    },
+    {
+      url: '/images/amur-falcon/bird-for-bird/bird_04.jpg',
+      title: 'Sustainable Income Generation',
+      description: 'Alternative income sources through poultry distribution'
+    },
+    {
+      url: '/images/amur-falcon/bird-for-bird/bird_05.jpg',
+      title: 'Conservation Education',
+      description: 'Teaching communities about Amur Falcon migration patterns'
+    },
+    {
+      url: '/images/amur-falcon/bird-for-bird/bird_06.jpg',
+      title: 'Village Engagement',
+      description: 'Community meetings for conservation awareness'
+    },
+    {
+      url: '/images/amur-falcon/bird-for-bird/bird_07.jpg',
+      title: 'Success Stories',
+      description: 'Documenting positive impact of Bird for Bird program'
+    },
+    {
+      url: '/images/amur-falcon/bird-for-bird/bird_08.jpg',
+      title: 'Community Support',
+      description: 'Local support for Amur Falcon protection initiatives'
+    },
+    {
+      url: '/images/amur-falcon/bird-for-bird/bird_09.jpg',
+      title: 'Program Implementation',
+      description: 'On-ground execution of conservation strategies'
+    },
+    {
+      url: '/images/amur-falcon/bird-for-bird/bird_10.jpg',
+      title: 'Conservation Partnership',
+      description: 'Collaborative efforts between Natural Nagas and communities'
+    }
+  ];
+
+  const patrollingSquadPhotos = [
+    {
+      url: '/images/amur-falcon/patrolling-squad/patrol_01.jpg',
+      title: 'Patrolling Squad Formation',
+      description: 'Community patrolling teams monitoring falcon roosting sites'
+    },
+    {
+      url: '/images/amur-falcon/patrolling-squad/patrol_02.jpg',
+      title: 'Night Patrol Operations',
+      description: 'Round-the-clock monitoring during migration season'
+    },
+    {
+      url: '/images/amur-falcon/patrolling-squad/patrol_03.jpg',
+      title: 'Community Vigilance',
+      description: 'Local volunteers ensuring falcon safety'
+    },
+    {
+      url: '/images/amur-falcon/patrolling-squad/patrol_04.jpg',
+      title: 'Protection Activities',
+      description: 'Active protection measures during roosting periods'
+    },
+    {
+      url: '/images/amur-falcon/patrolling-squad/patrol_05.jpg',
+      title: 'Monitoring Teams',
+      description: 'Trained community members tracking falcon movements'
+    },
+    {
+      url: '/images/amur-falcon/patrolling-squad/patrol_06.jpg',
+      title: 'Conservation Patrol',
+      description: 'Systematic patrolling of critical habitat areas'
+    },
+    {
+      url: '/images/amur-falcon/patrolling-squad/patrol_07.jpg',
+      title: 'Squad Training',
+      description: 'Capacity building for effective falcon protection'
+    },
+    {
+      url: '/images/amur-falcon/patrolling-squad/patrol_08.jpg',
+      title: 'Field Operations',
+      description: 'Coordinated field activities for falcon conservation'
+    },
+    {
+      url: '/images/amur-falcon/patrolling-squad/patrol_09.jpg',
+      title: 'Community Coordination',
+      description: 'Inter-village coordination for comprehensive protection'
+    },
+    {
+      url: '/images/amur-falcon/patrolling-squad/patrol_10.jpg',
+      title: 'Safety Monitoring',
+      description: 'Ensuring safe passage during falcon migration'
+    },
+    {
+      url: '/images/amur-falcon/patrolling-squad/patrol_11.jpg',
+      title: 'Dedicated Volunteers',
+      description: 'Community volunteers committed to falcon conservation'
+    },
+    {
+      url: '/images/amur-falcon/patrolling-squad/patrol_12.jpg',
+      title: 'Habitat Protection',
+      description: 'Protecting critical roosting and feeding areas'
+    },
+    {
+      url: '/images/amur-falcon/patrolling-squad/patrol_13.jpg',
+      title: 'Migration Monitoring',
+      description: 'Tracking falcon migration patterns and behavior'
+    },
+    {
+      url: '/images/amur-falcon/patrolling-squad/patrol_14.jpg',
+      title: 'Conservation Success',
+      description: 'Celebrating achievements in falcon protection'
+    },
+    {
+      url: '/images/amur-falcon/patrolling-squad/patrol_15.jpg',
+      title: 'Ongoing Vigilance',
+      description: 'Continuous monitoring for long-term conservation success'
+    }
+  ];
+
+  const wildlifeProjects = [
+    {
+      id: 'amur-falcon',
+      title: 'Amur Falcon Conservation',
+      subtitle: 'From 100,000+ Killed to Zero - Nagaland as Falcon Capital of World',
+      description: 'Our flagship program transformed Nagaland from a massacre site to a safe haven for Amur Falcons. Partnering with WTI, we signed historic MoUs with Pangti, Sungro, and Ashaa villages. The program includes Bird-for-Bird initiatives, Grain-for-Grain compensation, patrolling squads, and the annual Amur Falcon Festival.',
+      image: '/images/amur-falcon/main/amur_falcon_main.jpg',
+      impact: 'Zero Killing Achieved in 2013',
+      status: 'Active Since 2012',
+      icon: Bird,
+      isMainProject: true
+    },
+    {
+      title: 'Black Soft-shell Turtle Conservation',
+      description: 'Rediscovery and conservation of the Black Soft-Shell Turtle (listed as Extinct in Wild in 2002 by IUCN) at Wozhu Tsophow wetlands, Old Akuk village, Wokha District. This species was thought to be extinct until our discovery.',
+      image: 'https://images.pexels.com/photos/1618606/pexels-photo-1618606.jpeg',
+      impact: 'Species Back from Extinction',
+      icon: MapPin
+    },
+    {
+      title: 'Human-Elephant Conflict Mitigation',
+      description: 'Addressing human-animal conflict in Wokha District through Rapid Action Programme (RAP) with WTI. Providing relief to affected households in Pangti, Sungro, and Ashaa areas where elephants cause crop damage and livelihood losses.',
+      image: 'https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg',
+      impact: 'RAP Program with WTI',
+      icon: Elephant
+    }
+  ];
+
+  const communityProjects = [
+    {
+      title: 'Eco-tourism Development',
+      description: 'Creating sustainable tourism opportunities that generate income while protecting natural areas.',
+      image: 'https://images.pexels.com/photos/1761279/pexels-photo-1761279.jpeg',
+      impact: '5 Eco-tourism Sites'
+    },
+    {
+      title: 'Clean-up Drives',
+      description: 'Regular community-led environmental clean-up initiatives across villages and natural areas.',
+      image: 'https://images.pexels.com/photos/2767815/pexels-photo-2767815.jpeg',
+      impact: '200+ Volunteers'
+    },
+    {
+      title: 'Plantation & Environment Days',
+      description: 'Annual tree planting events and environmental awareness programs with schools and communities.',
+      image: 'https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg',
+      impact: '1,000+ Trees Planted'
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Hero */}
+      <section className="py-20 bg-gradient-to-br from-emerald-900 to-green-800 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">Our Programs</h1>
+          <p className="text-xl md:text-2xl text-emerald-200 max-w-3xl mx-auto">
+            Community-driven conservation initiatives protecting Nagaland's unique biodiversity
+          </p>
+        </div>
+      </section>
+
+      {/* Flagship Programs */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Flagship Programs</h2>
+            <p className="text-xl text-gray-600">Large-scale initiatives driving conservation impact across Nagaland</p>
+          </div>
+          
+          <div className="space-y-20">
+            {flagshipPrograms.map((program, index) => {
+              const IconComponent = program.icon;
+              return (
+                <div key={program.id} id={program.id} className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center`}>
+                  <div className="lg:w-1/2">
+                    <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                      <img 
+                        src={program.image} 
+                        alt={program.title}
+                        className="w-full h-96 object-cover"
+                      />
+                      <div className="absolute top-4 left-4">
+                        <div className="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 text-emerald-600 font-medium">
+                          {program.status}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="lg:w-1/2">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center">
+                        <IconComponent className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-3xl font-bold text-gray-900">{program.title}</h3>
+                        <div className="text-emerald-600 font-semibold">{program.subtitle}</div>
+                      </div>
+                    </div>
+                    
+                    <p className="text-gray-700 text-lg leading-relaxed mb-6">{program.description}</p>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                      {program.impact.map((item, idx) => (
+                        <div key={idx} className="bg-emerald-50 rounded-lg p-3 text-center">
+                          <div className="text-emerald-600 font-bold text-sm">{item}</div>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <div className="flex flex-wrap items-center gap-4">
+                      {(program.id === 'green-dream' || program.id === 'jica-nfmp' || program.id === 'element') && (
+                        <button
+                          onClick={() => toggleExpanded(program.id)}
+                          className="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold transition-all duration-300"
+                        >
+                          {expandedProgram === program.id ? 'Read Less' : 'Read More'}
+                          {expandedProgram === program.id ? 
+                            <ChevronUp className="w-5 h-5" /> : 
+                            <ChevronDown className="w-5 h-5" />
+                          }
+                        </button>
+                      )}
+                      <Link
+                        to="/get-involved"
+                        className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
+                      >
+                        Support This Program <ArrowRight className="w-5 h-5" />
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* Expanded Content for Green Dream Project */}
+                  {program.id === 'green-dream' && expandedProgram === 'green-dream' && (
+                      <div className="mt-8 p-6 bg-gradient-to-r from-emerald-50 to-green-50 rounded-xl border-l-4 border-emerald-500 animate-in slide-in-from-top duration-300">
+                        
+                        {/* Project Overview */}
+                        <div className="mb-8">
+                          <h4 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <Trees className="w-5 h-5 text-emerald-600" />
+                            Model Green Village Initiative
+                          </h4>
+                          <div className="bg-white rounded-lg p-6 shadow-sm">
+                            <p className="text-gray-700 leading-relaxed mb-4">
+                              The Green Dream Project (GDP) represents a pioneering approach to community-driven environmental conservation and sustainable development. Launched on World Environment Day 2015, this initiative adopted New Riphyim village as a model for sustainable living.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                              With the motto <em>"Of the community, by the community and for the community,"</em> the project demonstrates how local communities can lead environmental stewardship while achieving economic sustainability and biodiversity conservation goals.
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* External Link */}
+                        <div className="mb-8">
+                          <div className="bg-white rounded-lg p-4 shadow-sm border-l-4 border-emerald-400">
+                            <a
+                              href="https://morungexpress.com/new-riphyim-leads-way-environment-conservation"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 text-emerald-600 hover:text-emerald-700 font-semibold text-lg transition-colors"
+                            >
+                              <ExternalLink className="w-5 h-5" />
+                              Read: New Riphyim leads way in environment conservation - Morung Express
+                            </a>
+                            <p className="text-gray-600 text-sm mt-2">Featured coverage of our model village success story and environmental leadership</p>
+                          </div>
+                        </div>
+
+                        {/* Social Media Highlights */}
+                        <div className="mb-8">
+                          <h4 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                            <Calendar className="w-5 h-5 text-emerald-600" />
+                            Project Milestones & Recognition
+                          </h4>
+                          
+                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            {/* World Environment Day 2018 */}
+                            <div className="bg-white rounded-lg p-4 shadow-sm border border-emerald-100">
+                              <h5 className="font-semibold text-emerald-700 mb-3 flex items-center gap-2">
+                                <Calendar className="w-4 h-4" />
+                                World Environment Day 2018
+                              </h5>
+                              <iframe
+                                src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fnaturalnagas.org%2Fposts%2Fpfbid0idA7DwnbHNVMuPEhi4jvgcy7NJ7ihyWHPZTtTmNFXdbR2KADNFzEsgzuob8KiENbl&show_text=true&width=500"
+                                width="100%"
+                                height="300"
+                                style={{border: 'none', overflow: 'hidden'}}
+                                scrolling="no"
+                                frameBorder="0"
+                                allowFullScreen={true}
+                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                                className="w-full rounded"
+                              />
+                            </div>
+
+                            {/* Happy Earth Day 2019 */}
+                            <div className="bg-white rounded-lg p-4 shadow-sm border border-emerald-100">
+                              <h5 className="font-semibold text-emerald-700 mb-3 flex items-center gap-2">
+                                <Calendar className="w-4 h-4" />
+                                Earth Day Celebration 2019
+                              </h5>
+                              <iframe
+                                src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fnaturalnagas.org%2Fposts%2Fpfbid02rEh8zse9Qkn25X3Wt4G7eGc1gomzgMrsU7XJvHJPAzLGiYRSYyZwy1anQ6ts9Wntl&show_text=true&width=500"
+                                width="100%"
+                                height="300"
+                                style={{border: 'none', overflow: 'hidden'}}
+                                scrolling="no"
+                                frameBorder="0"
+                                allowFullScreen={true}
+                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                                className="w-full rounded"
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Community Engagement Activities */}
+                        <div className="mb-8">
+                          <h4 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                            <Users className="w-5 h-5 text-emerald-600" />
+                            Community Engagement & Field Activities
+                          </h4>
+                          
+                          {/* Chunglikha Visit */}
+                          <div className="mb-6">
+                            <h5 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                              <MapPin className="w-4 h-4 text-emerald-500" />
+                              Chunglikha Village Community Visit
+                            </h5>
+                            <div className="bg-white rounded-lg p-4 shadow-sm mb-4">
+                              <p className="text-gray-700 text-sm leading-relaxed">
+                                Community outreach and engagement activities in Chunglikha village, focusing on environmental awareness, 
+                                waste management initiatives, and sustainable development practices as part of the GDP model village expansion.
+                              </p>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                              {chunglikhaPhotos.map((photo, idx) => (
+                                <div key={idx} className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300">
+                                  <div className="relative h-48 overflow-hidden">
+                                    <img
+                                      src={photo.url}
+                                      alt={photo.title}
+                                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    <div className="absolute bottom-2 left-2 right-2 text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                      {photo.title}
+                                    </div>
+                                  </div>
+                                  <div className="p-3">
+                                    <p className="text-gray-600 text-sm">{photo.description}</p>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Model Village Showcase */}
+                        <div className="mb-8">
+                          <h4 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                            <Award className="w-5 h-5 text-emerald-600" />
+                            Model Village Showcase & Learning Exchange
+                          </h4>
+                          
+                          <div className="bg-white rounded-lg p-6 shadow-sm mb-6">
+                            <h5 className="font-semibold text-emerald-700 mb-3">Exposure Visit to New Riphyim - Cleanest Village in Nagaland</h5>
+                            <p className="text-gray-700 leading-relaxed text-sm mb-4">
+                              New Riphyim village serves as a living example of successful community-led environmental conservation. 
+                              Recognized as one of the cleanest villages in Nagaland, it demonstrates sustainable practices including 
+                              waste management, water conservation, and biodiversity preservation.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed text-sm">
+                              The exposure visits allow other communities to learn from New Riphyim's success story and adopt 
+                              similar sustainable development practices in their own villages.
+                            </p>
+                          </div>
+                          
+                          {/* Activities under GDP */}
+                          <div className="mb-6">
+                            <h5 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                              <Trees className="w-4 h-4 text-emerald-500" />
+                              Community Development Activities
+                            </h5>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                              {gdpActivityPhotos.map((photo, idx) => (
+                                <div key={idx} className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300">
+                                  <div className="relative h-48 overflow-hidden">
+                                    <img
+                                      src={photo.url}
+                                      alt={photo.title}
+                                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    <div className="absolute bottom-2 left-2 right-2 text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                      {photo.title}
+                                    </div>
+                                  </div>
+                                  <div className="p-3">
+                                    <p className="text-gray-600 text-sm">{photo.description}</p>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                        {/* Water Conservation & Infrastructure */}
+                        <div className="mb-8">
+                          <h4 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                            <MapPin className="w-5 h-5 text-emerald-600" />
+                            Water Conservation & Infrastructure Development
+                          </h4>
+                          
+                          <div className="bg-white rounded-lg p-6 shadow-sm mb-6">
+                            <h5 className="font-semibold text-emerald-700 mb-3">Water Table Recharge Initiative</h5>
+                            <p className="text-gray-700 leading-relaxed text-sm mb-4">
+                              The Water Table Recharge project under GDP focuses on sustainable water resource management through 
+                              community-led infrastructure development. This initiative ensures long-term water security while 
+                              demonstrating eco-friendly water harvesting techniques.
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                              <div className="bg-emerald-50 rounded-lg p-3 text-center">
+                                <div className="font-semibold text-emerald-700">Community-Led</div>
+                                <div className="text-gray-600">Local ownership ensures sustainability</div>
+                              </div>
+                              <div className="bg-emerald-50 rounded-lg p-3 text-center">
+                                <div className="font-semibold text-emerald-700">Traditional Methods</div>
+                                <div className="text-gray-600">Integration of indigenous knowledge</div>
+                              </div>
+                              <div className="bg-emerald-50 rounded-lg p-3 text-center">
+                                <div className="font-semibold text-emerald-700">Long-term Impact</div>
+                                <div className="text-gray-600">Sustainable water security</div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {waterTableRechargePhotos.map((photo, idx) => (
+                              <div key={idx} className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300">
+                                <div className="relative h-48 overflow-hidden">
+                                  <img
+                                    src={photo.url}
+                                    alt={photo.title}
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                  />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                  <div className="absolute bottom-2 left-2 right-2 text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    {photo.title}
+                                  </div>
+                                </div>
+                                <div className="p-3">
+                                  <p className="text-gray-600 text-sm">{photo.description}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Project Impact & Success Metrics */}
+                        <div className="bg-gradient-to-r from-emerald-100 to-green-100 rounded-lg p-6 border-l-4 border-emerald-600">
+                          <h4 className="text-xl font-bold text-emerald-800 mb-4 flex items-center gap-2">
+                            <Award className="w-5 h-5" />
+                            Project Impact & Achievements
+                          </h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="bg-white rounded-lg p-4">
+                              <h5 className="font-semibold text-emerald-700 mb-2">Model Village Recognition</h5>
+                              <p className="text-gray-700 text-sm">New Riphyim recognized as cleanest village in Nagaland and regional model for sustainable development</p>
+                            </div>
+                            <div className="bg-white rounded-lg p-4">
+                              <h5 className="font-semibold text-emerald-700 mb-2">Community Engagement</h5>
+                              <p className="text-gray-700 text-sm">100% community participation in conservation activities and waste management initiatives</p>
+                            </div>
+                            <div className="bg-white rounded-lg p-4">
+                              <h5 className="font-semibold text-emerald-700 mb-2">Water Security</h5>
+                              <p className="text-gray-700 text-sm">Sustainable water table recharge ensuring year-round water availability for the community</p>
+                            </div>
+                            <div className="bg-white rounded-lg p-4">
+                              <h5 className="font-semibold text-emerald-700 mb-2">Replication Success</h5>
+                              <p className="text-gray-700 text-sm">GDP model successfully influencing conservation practices in neighboring villages</p>
+                            </div>
+                          </div>
+                        </div>
+
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Expanded Content for JICA NFMP Project */}
+                    {program.id === 'jica-nfmp' && expandedProgram === 'jica-nfmp' && (
+                      <div className="mt-8 p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border-l-4 border-green-500 animate-in slide-in-from-top duration-300">
+                        
+                        {/* Project Overview */}
+                        <div className="mb-8">
+                          <h4 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <Trees className="w-5 h-5 text-green-600" />
+                            Japan International Cooperation Agency Partnership
+                          </h4>
+                          <div className="bg-white rounded-lg p-6 shadow-sm">
+                            <p className="text-gray-700 leading-relaxed mb-4">
+                              The JICA Natural Forest Management Project (NFMP) represents a significant international collaboration 
+                              between Japan and India for sustainable forest management. Natural Nagas serves as a key implementing 
+                              partner, leveraging our deep local knowledge and community relationships.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed mb-4">
+                              Our organization provides essential expertise in local landscape dynamics, logistics coordination, 
+                              and comprehensive data management across Wokha district. We conduct monitoring activities, provide 
+                              specialized training, and handhold community representatives to ensure project success.
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                              <div className="bg-green-50 rounded-lg p-3 text-center">
+                                <div className="font-semibold text-green-700">Local Expertise</div>
+                                <div className="text-gray-600">Deep community knowledge</div>
+                              </div>
+                              <div className="bg-green-50 rounded-lg p-3 text-center">
+                                <div className="font-semibold text-green-700">Logistics Support</div>
+                                <div className="text-gray-600">Comprehensive coordination</div>
+                              </div>
+                              <div className="bg-green-50 rounded-lg p-3 text-center">
+                                <div className="font-semibold text-green-700">Data Management</div>
+                                <div className="text-gray-600">Monitoring & evaluation</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Village Coverage */}
+                        <div className="mb-8">
+                          <h4 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                            <MapPin className="w-5 h-5 text-green-600" />
+                            Comprehensive Village Coverage - 24 Villages Across 4 Batches
+                          </h4>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {/* Batch 1 */}
+                            <div className="bg-white rounded-lg p-4 shadow-sm border-l-4 border-green-400">
+                              <h5 className="font-bold text-green-700 mb-3 flex items-center gap-2">
+                                <Award className="w-4 h-4" />
+                                Batch-1 (3 Villages)
+                              </h5>
+                              <ul className="space-y-1 text-gray-700">
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  Wokha
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  New Riphyim
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  Old Riphyim
+                                </li>
+                              </ul>
+                            </div>
+
+                            {/* Batch 2 */}
+                            <div className="bg-white rounded-lg p-4 shadow-sm border-l-4 border-green-400">
+                              <h5 className="font-bold text-green-700 mb-3 flex items-center gap-2">
+                                <Award className="w-4 h-4" />
+                                Batch-2 (6 Villages)
+                              </h5>
+                              <ul className="space-y-1 text-gray-700">
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  New Wokha
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  Longsa
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  Longsachung
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  Yikhum
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  Old Changsu
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  Nungying
+                                </li>
+                              </ul>
+                            </div>
+
+                            {/* Batch 3 */}
+                            <div className="bg-white rounded-lg p-4 shadow-sm border-l-4 border-green-400">
+                              <h5 className="font-bold text-green-700 mb-3 flex items-center gap-2">
+                                <Award className="w-4 h-4" />
+                                Batch-3 (5 Villages)
+                              </h5>
+                              <ul className="space-y-1 text-gray-700">
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  Yanthamo
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  Niroyo
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  Phiro
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  Tsungiki
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  New Changsu
+                                </li>
+                              </ul>
+                            </div>
+
+                            {/* Batch 4 */}
+                            <div className="bg-white rounded-lg p-4 shadow-sm border-l-4 border-green-400">
+                              <h5 className="font-bold text-green-700 mb-3 flex items-center gap-2">
+                                <Award className="w-4 h-4" />
+                                Batch-4 (6 Villages)
+                              </h5>
+                              <ul className="space-y-1 text-gray-700">
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  Humtso
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  Elumyo
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  N.Longidang
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  Shaki
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  Koio
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <MapPin className="w-3 h-3 text-green-500" />
+                                  Mungya
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          
+                          <div className="mt-6 bg-white rounded-lg p-6 shadow-sm">
+                            <h5 className="font-semibold text-green-700 mb-3">Strategic Implementation Approach</h5>
+                            <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                              Our systematic batch-wise approach ensures comprehensive coverage while maintaining quality standards. 
+                              Each batch receives tailored training, monitoring, and support based on local community needs and forest management requirements.
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                              <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span className="text-gray-700">Community representative training</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span className="text-gray-700">Continuous monitoring & evaluation</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span className="text-gray-700">Technical expertise provision</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span className="text-gray-700">Data collection & management</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Project Impact & Success Metrics */}
+                        <div className="bg-gradient-to-r from-green-100 to-emerald-100 rounded-lg p-6 border-l-4 border-green-600">
+                          <h4 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
+                            <Award className="w-5 h-5" />
+                            Partnership Impact & Achievements
+                          </h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="bg-white rounded-lg p-4">
+                              <h5 className="font-semibold text-green-700 mb-2">Comprehensive Coverage</h5>
+                              <p className="text-gray-700 text-sm">Successfully managing 24 villages across Wokha district in systematic batches</p>
+                            </div>
+                            <div className="bg-white rounded-lg p-4">
+                              <h5 className="font-semibold text-green-700 mb-2">Local Expertise Integration</h5>
+                              <p className="text-gray-700 text-sm">Leveraging indigenous knowledge systems with modern forest management practices</p>
+                            </div>
+                            <div className="bg-white rounded-lg p-4">
+                              <h5 className="font-semibold text-green-700 mb-2">International Collaboration</h5>
+                              <p className="text-gray-700 text-sm">Strengthening Japan-India cooperation in sustainable forest management</p>
+                            </div>
+                            <div className="bg-white rounded-lg p-4">
+                              <h5 className="font-semibold text-green-700 mb-2">Community Empowerment</h5>
+                              <p className="text-gray-700 text-sm">Training and handholding community representatives for long-term sustainability</p>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    )}
+
+                    {/* Expanded Content for ELEMENT World Bank Project */}
+                    {program.id === 'element' && expandedProgram === 'element' && (
+                      <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border-l-4 border-blue-500 animate-in slide-in-from-top duration-300">
+                        
+                        {/* Project Overview */}
+                        <div className="mb-8">
+                          <h4 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <Award className="w-5 h-5 text-blue-600" />
+                            ELEMENT Project - Enhancing Landscape & Ecosystem Management
+                          </h4>
+                          <div className="bg-white rounded-lg p-6 shadow-sm">
+                            <p className="text-gray-700 leading-relaxed mb-4">
+                              The ELEMENT (Enhancing Landscape and Ecosystem Management) Project is a transformative $225.5 million 
+                              World Bank initiative aimed at strengthening landscape and ecosystem management across India. 
+                              Natural Nagas has officially contracted with the Government of Nagaland as a key implementation partner.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed mb-4">
+                              Our organization operates across two Protected Forest Areas (PFAs) in Wokha district, covering 23 villages 
+                              with comprehensive conservation and community development activities. This partnership represents our largest 
+                              institutional collaboration, leveraging our deep local knowledge and proven track record.
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                              <div className="bg-blue-50 rounded-lg p-3 text-center">
+                                <div className="font-semibold text-blue-700">$225.5M Project</div>
+                                <div className="text-gray-600">World Bank funding</div>
+                              </div>
+                              <div className="bg-blue-50 rounded-lg p-3 text-center">
+                                <div className="font-semibold text-blue-700">2 PFAs Covered</div>
+                                <div className="text-gray-600">Wokha district focus</div>
+                              </div>
+                              <div className="bg-blue-50 rounded-lg p-3 text-center">
+                                <div className="font-semibold text-blue-700">23 Villages</div>
+                                <div className="text-gray-600">Direct community impact</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Our Role & Responsibilities */}
+                        <div className="mb-8">
+                          <h4 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <Users className="w-5 h-5 text-blue-600" />
+                            Natural Nagas' Role & Responsibilities
+                          </h4>
+                          <div className="bg-white rounded-lg p-6 shadow-sm">
+                            <p className="text-gray-700 leading-relaxed mb-4">
+                              As an organization deeply familiar with local landscape dynamics and community relationships, 
+                              Natural Nagas serves as the primary implementation partner for ELEMENT project activities in Wokha district.
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                              <div className="border-l-4 border-blue-300 pl-4">
+                                <h5 className="font-semibold text-blue-700 mb-2">Technical Expertise</h5>
+                                <p className="text-gray-700">Providing subject matter experts across various conservation and community development domains</p>
+                              </div>
+                              <div className="border-l-4 border-blue-300 pl-4">
+                                <h5 className="font-semibold text-blue-700 mb-2">Logistics Coordination</h5>
+                                <p className="text-gray-700">Managing field operations, resource deployment, and activity coordination across PFAs</p>
+                              </div>
+                              <div className="border-l-4 border-blue-300 pl-4">
+                                <h5 className="font-semibold text-blue-700 mb-2">Data Management</h5>
+                                <p className="text-gray-700">Comprehensive monitoring, evaluation, and data collection systems</p>
+                              </div>
+                              <div className="border-l-4 border-blue-300 pl-4">
+                                <h5 className="font-semibold text-blue-700 mb-2">Community Engagement</h5>
+                                <p className="text-gray-700">Training, monitoring, and handholding community representatives for sustainable impact</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Communities Involved */}
+                        <div>
+                          <h4 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                            <Users className="w-5 h-5 text-blue-600" />
+                            Communities Involved - 23 Villages Across 2 PFAs
+                          </h4>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {/* PFA 1 */}
+                            <div className="bg-white rounded-lg p-6 shadow-sm border-l-4 border-blue-400">
+                              <h5 className="font-bold text-blue-700 mb-4 flex items-center gap-2">
+                                <MapPin className="w-4 h-4" />
+                                PFA 1 Wokha (10 Villages)
+                              </h5>
+                              <div className="grid grid-cols-2 gap-2">
+                                {[
+                                  'Aree New', 'Aree Old', 'Meshangpen', 'New Riphyim', 'Olkotso',
+                                  'Pangti', 'Pyotchu', 'Tsopo', 'Tsungiki', 'Wokha'
+                                ].map((village, idx) => (
+                                  <div key={idx} className="flex items-center gap-2 text-sm text-gray-700">
+                                    <div className="w-2 h-2 bg-blue-400 rounded-full flex-shrink-0"></div>
+                                    {village}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* PFA 2 */}
+                            <div className="bg-white rounded-lg p-6 shadow-sm border-l-4 border-blue-400">
+                              <h5 className="font-bold text-blue-700 mb-4 flex items-center gap-2">
+                                <MapPin className="w-4 h-4" />
+                                PFA 2 Wokha (13 Villages)
+                              </h5>
+                              <div className="grid grid-cols-2 gap-2">
+                                {[
+                                  'Akuk Old', 'Chudi', 'Lakhuti', 'Longtsung', 'Lotsu', 'Mekokla', 'Moilan',
+                                  'Morakjo', 'Pyangsa', 'Sanis', 'Sunglup', 'Upper Baghty', 'Yonchicho'
+                                ].map((village, idx) => (
+                                  <div key={idx} className="flex items-center gap-2 text-sm text-gray-700">
+                                    <div className="w-2 h-2 bg-blue-400 rounded-full flex-shrink-0"></div>
+                                    {village}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+
+                          
+                          <div className="mt-6 bg-white rounded-lg p-6 shadow-sm">
+                            <h5 className="font-semibold text-blue-700 mb-3">Strategic Implementation Framework</h5>
+                            <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                              Our dual PFA approach ensures comprehensive coverage while allowing for customized interventions based on 
+                              specific ecosystem needs and community characteristics. Each PFA receives tailored conservation strategies 
+                              aligned with World Bank standards and local community requirements.
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                              <div className="flex items-start gap-3">
+                                <div className="w-4 h-4 bg-blue-500 rounded-full mt-1 flex-shrink-0"></div>
+                                <div>
+                                  <div className="font-medium text-gray-900">PFA 1 Focus Areas</div>
+                                  <div className="text-gray-600">Biodiversity conservation, community livelihood enhancement, sustainable resource management</div>
+                                </div>
+                              </div>
+                              <div className="flex items-start gap-3">
+                                <div className="w-4 h-4 bg-blue-500 rounded-full mt-1 flex-shrink-0"></div>
+                                <div>
+                                  <div className="font-medium text-gray-900">PFA 2 Focus Areas</div>
+                                  <div className="text-gray-600">Ecosystem restoration, traditional knowledge integration, climate adaptation strategies</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Key Project Components */}
+                        <div className="mb-8">
+                          <h4 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                            <Trees className="w-5 h-5 text-blue-600" />
+                            Key Project Components & Activities
+                          </h4>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="bg-white rounded-lg p-6 shadow-sm border-l-4 border-blue-300">
+                              <h5 className="font-semibold text-blue-700 mb-3 flex items-center gap-2">
+                                <MapPin className="w-4 h-4" />
+                                Landscape Management
+                              </h5>
+                              <ul className="space-y-2 text-sm text-gray-700">
+                                <li className="flex items-center gap-2">
+                                  <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
+                                  Forest cover assessment and monitoring
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
+                                  Habitat connectivity enhancement
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
+                                  Degraded area restoration programs
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div className="bg-white rounded-lg p-6 shadow-sm border-l-4 border-blue-300">
+                              <h5 className="font-semibold text-blue-700 mb-3 flex items-center gap-2">
+                                <Users className="w-4 h-4" />
+                                Community Development
+                              </h5>
+                              <ul className="space-y-2 text-sm text-gray-700">
+                                <li className="flex items-center gap-2">
+                                  <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
+                                  Livelihood diversification support
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
+                                  Capacity building programs
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
+                                  Indigenous knowledge documentation
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div className="bg-white rounded-lg p-6 shadow-sm border-l-4 border-blue-300">
+                              <h5 className="font-semibold text-blue-700 mb-3 flex items-center gap-2">
+                                <Award className="w-4 h-4" />
+                                Conservation Measures
+                              </h5>
+                              <ul className="space-y-2 text-sm text-gray-700">
+                                <li className="flex items-center gap-2">
+                                  <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
+                                  Biodiversity monitoring systems
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
+                                  Protected area strengthening
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
+                                  Wildlife conflict mitigation
+                                </li>
+                              </ul>
+                            </div>
+
+                            <div className="bg-white rounded-lg p-6 shadow-sm border-l-4 border-blue-300">
+                              <h5 className="font-semibold text-blue-700 mb-3 flex items-center gap-2">
+                                <Calendar className="w-4 h-4" />
+                                Monitoring & Evaluation
+                              </h5>
+                              <ul className="space-y-2 text-sm text-gray-700">
+                                <li className="flex items-center gap-2">
+                                  <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
+                                  Impact assessment frameworks
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
+                                  Community feedback systems
+                                </li>
+                                <li className="flex items-center gap-2">
+                                  <div className="w-1 h-1 bg-blue-400 rounded-full"></div>
+                                  Data management protocols
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Project Impact & Success Metrics */}
+                        <div className="bg-gradient-to-r from-blue-100 to-indigo-100 rounded-lg p-6 border-l-4 border-blue-600">
+                          <h4 className="text-xl font-bold text-blue-800 mb-4 flex items-center gap-2">
+                            <Award className="w-5 h-5" />
+                            Project Impact & Strategic Significance
+                          </h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="bg-white rounded-lg p-4">
+                              <h5 className="font-semibold text-blue-700 mb-2">World Bank Partnership</h5>
+                              <p className="text-gray-700 text-sm">Official contract with Government of Nagaland for $225.5M international development initiative</p>
+                            </div>
+                            <div className="bg-white rounded-lg p-4">
+                              <h5 className="font-semibold text-blue-700 mb-2">Comprehensive Coverage</h5>
+                              <p className="text-gray-700 text-sm">Systematic management of 23 villages across two Protected Forest Areas in Wokha district</p>
+                            </div>
+                            <div className="bg-white rounded-lg p-4">
+                              <h5 className="font-semibold text-blue-700 mb-2">Institutional Strengthening</h5>
+                              <p className="text-gray-700 text-sm">Enhanced organizational capacity and international recognition as trusted implementation partner</p>
+                            </div>
+                            <div className="bg-white rounded-lg p-4">
+                              <h5 className="font-semibold text-blue-700 mb-2">Sustainable Development</h5>
+                              <p className="text-gray-700 text-sm">Integration of conservation goals with community development and livelihood enhancement</p>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Wildlife Projects */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Wildlife Conservation Projects</h2>
+            <p className="text-xl text-gray-600">Targeted efforts to protect endangered and vulnerable species</p>
+          </div>
+          
+          <div className="space-y-12">
+            {/* Main Amur Falcon Project */}
+            {wildlifeProjects
+              .filter(project => project.isMainProject)
+              .map((project, index) => {
+                const IconComponent = project.icon;
+                return (
+                  <div key={project.id} id={project.id} className="bg-white rounded-2xl shadow-xl overflow-hidden">
+                    <div className="lg:flex">
+                      <div className="lg:w-1/2">
+                        <div className="relative h-96 lg:h-full overflow-hidden">
+                          <img 
+                            src={project.image} 
+                            alt={project.title}
+                            className="w-full h-full object-cover"
+                          />
+                          <div className="absolute top-4 left-4">
+                            <div className="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 text-emerald-600 font-medium">
+                              {project.status}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="lg:w-1/2 p-8 lg:p-12">
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center">
+                            <IconComponent className="w-6 h-6 text-white" />
+                          </div>
+                          <div>
+                            <h3 className="text-3xl font-bold text-gray-900">{project.title}</h3>
+                            <div className="text-emerald-600 font-semibold">{project.subtitle}</div>
+                          </div>
+                        </div>
+                        
+                        <p className="text-gray-700 text-lg leading-relaxed mb-6">{project.description}</p>
+                        
+                        <div className="bg-emerald-50 rounded-lg p-4 mb-6">
+                          <div className="flex items-center gap-2 text-emerald-700 font-bold">
+                            <IconComponent className="w-5 h-5" />
+                            <span>Key Achievement: {project.impact}</span>
+                          </div>
+                        </div>
+                        
+                        <div className="flex flex-wrap items-center gap-4">
+                          <button
+                            onClick={() => toggleExpanded(project.id)}
+                            className="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold transition-all duration-300"
+                          >
+                            {expandedProgram === project.id ? 'Read Less' : 'Read More'}
+                            {expandedProgram === project.id ? 
+                              <ChevronUp className="w-5 h-5" /> : 
+                              <ChevronDown className="w-5 h-5" />
+                            }
+                          </button>
+                          <Link
+                            to="/get-involved"
+                            className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
+                          >
+                            Support Conservation <ArrowRight className="w-5 h-5" />
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Expanded Content for Amur Falcon Conservation */}
+                    {project.id === 'amur-falcon' && expandedProgram === 'amur-falcon' && (
+                      <div className="mt-8 p-6 bg-gradient-to-r from-emerald-50 to-green-50 rounded-xl border-l-4 border-emerald-500 animate-in slide-in-from-top duration-300">
+                        
+                        {/* Conservation Story */}
+                        <div className="mb-8">
+                          <h4 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <Bird className="w-5 h-5 text-emerald-600" />
+                            The Conservation Story
+                          </h4>
+                          <div className="bg-white rounded-lg p-6 shadow-sm">
+                            <p className="text-gray-700 leading-relaxed mb-4">
+                              The Amur Falcon conservation story is one of the most remarkable wildlife conservation success stories in Northeast India. What started as a massacre site where over 100,000 Amur Falcons were killed annually has transformed into the world's largest roosting site for these magnificent birds.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed mb-4">
+                              In 2012, Natural Nagas partnered with Wildlife Trust of India (WTI) to launch this groundbreaking conservation initiative. Through community engagement, alternative livelihood programs, and dedicated protection measures, we successfully achieved zero killing by 2013.
+                            </p>
+                            <p className="text-gray-700 leading-relaxed">
+                              Today, Nagaland proudly holds the title of "Falcon Capital of the World," with Doyang reservoir area hosting nearly 1 million Amur Falcons during their annual migration. This transformation showcases the power of community-based conservation and sustainable development.
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* MOU Signing Section */}
+                        <div className="mb-8">
+                          <h4 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <Award className="w-5 h-5 text-emerald-600" />
+                            Historic MOU Signing with Villages
+                          </h4>
+                          
+                          <div className="mb-6 bg-white rounded-lg p-4 shadow-sm">
+                            <a
+                              href="https://india.mongabay.com/2012/11/07/amur-falcons-get-a-lifeline-in-nagaland/"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 text-emerald-600 hover:text-emerald-700 font-semibold text-lg transition-colors mb-4"
+                            >
+                              <ExternalLink className="w-5 h-5" />
+                              Read: Amur Falcons get a lifeline in Nagaland - Mongabay India
+                            </a>
+                            <p className="text-gray-700 leading-relaxed">
+                              Natural Nagas signed historic Memorandums of Understanding (MOUs) with Pangti, Sungro, and Ashaa villages, creating the foundation for community-based conservation efforts. These agreements established zero-hunting policies and community participation frameworks.
+                            </p>
+                          </div>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {amurFalconMouPhotos.map((photo, idx) => (
+                              <div key={idx} className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300">
+                                <div className="relative h-48 overflow-hidden">
+                                  <img
+                                    src={photo.url}
+                                    alt={photo.title}
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                  />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                  <div className="absolute bottom-2 left-2 right-2 text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    {photo.title}
+                                  </div>
+                                </div>
+                                <div className="p-3">
+                                  <p className="text-gray-600 text-sm">{photo.description}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Bird for Bird Project */}
+                        <div className="mb-8">
+                          <h4 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <Users className="w-5 h-5 text-emerald-600" />
+                            Bird for Bird Initiative
+                          </h4>
+                          
+                          <div className="mb-6 bg-white rounded-lg p-4 shadow-sm">
+                            <p className="text-gray-700 leading-relaxed">
+                              The Bird for Bird project provides alternative livelihood options to communities previously dependent on falcon hunting. Through this innovative program, families receive domestic birds (chickens, ducks) as compensation for ceasing hunting activities, creating sustainable income sources while protecting the falcons.
+                            </p>
+                          </div>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {birdForBirdPhotos.map((photo, idx) => (
+                              <div key={idx} className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300">
+                                <div className="relative h-48 overflow-hidden">
+                                  <img
+                                    src={photo.url}
+                                    alt={photo.title}
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                  />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                  <div className="absolute bottom-2 left-2 right-2 text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    {photo.title}
+                                  </div>
+                                </div>
+                                <div className="p-3">
+                                  <p className="text-gray-600 text-sm">{photo.description}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Patrolling Squad */}
+                        <div className="mb-8">
+                          <h4 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <MapPin className="w-5 h-5 text-emerald-600" />
+                            Community Patrolling Squad
+                          </h4>
+                          
+                          <div className="mb-6 bg-white rounded-lg p-4 shadow-sm">
+                            <p className="text-gray-700 leading-relaxed">
+                              Dedicated community patrolling squads monitor falcon roosting sites throughout the migration season. These trained volunteers conduct round-the-clock surveillance, ensuring the safety of roosting falcons and preventing any hunting activities. The patrolling teams have been instrumental in maintaining zero killing since 2013.
+                            </p>
+                          </div>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {patrollingSquadPhotos.map((photo, idx) => (
+                              <div key={idx} className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300">
+                                <div className="relative h-48 overflow-hidden">
+                                  <img
+                                    src={photo.url}
+                                    alt={photo.title}
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                  />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                  <div className="absolute bottom-2 left-2 right-2 text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    {photo.title}
+                                  </div>
+                                </div>
+                                <div className="p-3">
+                                  <p className="text-gray-600 text-sm">{photo.description}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Additional Programs */}
+                        <div className="mb-8">
+                          <h4 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                            <Award className="w-5 h-5 text-emerald-600" />
+                            Additional Conservation Programs
+                          </h4>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {/* Signage Program */}
+                            <div className="bg-white rounded-lg p-6 shadow-sm border-l-4 border-emerald-400">
+                              <h5 className="font-bold text-emerald-700 mb-3 flex items-center gap-2">
+                                <MapPin className="w-4 h-4" />
+                                Signage & Awareness Program
+                              </h5>
+                              <p className="text-gray-700 text-sm leading-relaxed">
+                                Strategic placement of conservation signage throughout the Doyang reservoir area to educate visitors and local communities about Amur Falcon conservation. These multilingual signs promote awareness and encourage responsible behavior around roosting sites.
+                              </p>
+                            </div>
+
+                            {/* Relief Program */}
+                            <div className="bg-white rounded-lg p-6 shadow-sm border-l-4 border-emerald-400">
+                              <h5 className="font-bold text-emerald-700 mb-3 flex items-center gap-2">
+                                <Users className="w-4 h-4" />
+                                Community Relief Program
+                              </h5>
+                              <p className="text-gray-700 text-sm leading-relaxed">
+                                Direct support to affected families and communities through compensation schemes, alternative livelihood training, and capacity building programs. This comprehensive relief system ensures sustainable conservation while addressing community needs.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Conservation Impact */}
+                        <div className="bg-gradient-to-r from-emerald-100 to-green-100 rounded-lg p-6 border-l-4 border-emerald-600">
+                          <h4 className="text-xl font-bold text-emerald-800 mb-4 flex items-center gap-2">
+                            <Award className="w-5 h-5" />
+                            Conservation Impact & Recognition
+                          </h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="bg-white rounded-lg p-4">
+                              <h5 className="font-semibold text-emerald-700 mb-2">Global Recognition</h5>
+                              <p className="text-gray-700 text-sm">Nagaland recognized as "Falcon Capital of the World" with nearly 1 million falcons roosting annually</p>
+                            </div>
+                            <div className="bg-white rounded-lg p-4">
+                              <h5 className="font-semibold text-emerald-700 mb-2">Zero Killing Achievement</h5>
+                              <p className="text-gray-700 text-sm">Complete elimination of falcon hunting from 100,000+ killed annually to zero since 2013</p>
+                            </div>
+                            <div className="bg-white rounded-lg p-4">
+                              <h5 className="font-semibold text-emerald-700 mb-2">Community Transformation</h5>
+                              <p className="text-gray-700 text-sm">Successful transition of hunter communities to conservation advocates and eco-tourism guides</p>
+                            </div>
+                            <div className="bg-white rounded-lg p-4">
+                              <h5 className="font-semibold text-emerald-700 mb-2">Annual Festival</h5>
+                              <p className="text-gray-700 text-sm">Established Amur Falcon Festival celebrating conservation success and promoting eco-tourism</p>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    )}
+                    
+                  </div>
+                );
+              })}
+            
+            {/* Other Wildlife Projects Grid */}
+            <div className="grid md:grid-cols-2 gap-8">
+              {wildlifeProjects
+                .filter(project => !project.isMainProject)
+                .map((project, index) => {
+                  const IconComponent = project.icon;
+                  const projectId = project.title.includes('Elephant') ? 'elephant-conflict' : project.id || `project-${index}`;
+                  
+                  return (
+                    <div key={projectId} id={projectId} className="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-500">
+                      <div className="relative h-64 overflow-hidden">
+                        <img 
+                          src={project.image} 
+                          alt={project.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div className="absolute bottom-4 left-4">
+                          <div className="bg-emerald-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                            {project.impact}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="p-6">
+                        <div className="flex items-center gap-3 mb-3">
+                          <IconComponent className="w-6 h-6 text-emerald-600" />
+                          <h3 className="text-xl font-bold text-gray-900">{project.title}</h3>
+                        </div>
+                        <p className="text-gray-700 leading-relaxed">{project.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Community Projects */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Community Projects</h2>
+            <p className="text-xl text-gray-600">Empowering local communities through conservation action</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {communityProjects.map((project, index) => (
+              <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-500">
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <div className="absolute bottom-3 left-3">
+                    <div className="bg-white text-emerald-600 px-3 py-1 rounded-full text-sm font-medium">
+                      {project.impact}
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-emerald-600 transition-colors duration-300">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-700">{project.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Get Involved CTA */}
+      <section className="py-16 bg-emerald-600 text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold mb-4">Support Our Conservation Work</h2>
+          <p className="text-xl text-emerald-200 mb-8">
+            Every contribution helps us protect more species, engage more communities, and create lasting conservation impact.
+          </p>
+          <Link
+            to="/get-involved"
+            className="inline-flex items-center gap-2 bg-white text-emerald-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+          >
+            Get Involved Today <ArrowRight className="w-5 h-5" />
+          </Link>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Programs;
