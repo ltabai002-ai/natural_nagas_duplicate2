@@ -468,66 +468,69 @@ const Programs = () => {
             {flagshipPrograms.map((program, index) => {
               const IconComponent = program.icon;
               return (
-                <div key={program.id} id={program.id} className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center`}>
-                  <div className="lg:w-1/2">
-                    <div className="relative rounded-2xl overflow-hidden shadow-xl">
-                      <img 
-                        src={program.image} 
-                        alt={program.title}
-                        className="w-full h-96 object-cover"
-                      />
-                      <div className="absolute top-4 left-4">
-                        <div className="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 text-emerald-600 font-medium">
-                          {program.status}
+                <div key={program.id} id={program.id}>
+                  <div className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center`}>
+                    <div className="lg:w-1/2">
+                      <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                        <img
+                          src={program.image}
+                          alt={program.title}
+                          className="w-full h-96 object-cover"
+                        />
+                        <div className="absolute top-4 left-4">
+                          <div className="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 text-emerald-600 font-medium">
+                            {program.status}
+                          </div>
                         </div>
+                      </div>
+                    </div>
+
+                    <div className="lg:w-1/2">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center">
+                          <IconComponent className="w-6 h-6 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="text-3xl font-bold text-gray-900">{program.title}</h3>
+                          <div className="text-emerald-600 font-semibold">{program.subtitle}</div>
+                        </div>
+                      </div>
+
+                      <p className="text-gray-700 text-lg leading-relaxed mb-6">{program.description}</p>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                        {program.impact.map((item, idx) => (
+                          <div key={idx} className="bg-emerald-50 rounded-lg p-3 text-center">
+                            <div className="text-emerald-600 font-bold text-sm">{item}</div>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-4">
+                        {(program.id === 'green-dream' || program.id === 'jica-nfmp' || program.id === 'element') && (
+                          <button
+                            onClick={() => toggleExpanded(program.id)}
+                            className="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold transition-all duration-300"
+                          >
+                            {expandedProgram === program.id ? 'Read Less' : 'Read More'}
+                            {expandedProgram === program.id ?
+                              <ChevronUp className="w-5 h-5" /> :
+                              <ChevronDown className="w-5 h-5" />
+                            }
+                          </button>
+                        )}
+                        <Link
+                          to="/get-involved"
+                          className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
+                        >
+                          Support This Program <ArrowRight className="w-5 h-5" />
+                        </Link>
                       </div>
                     </div>
                   </div>
-                  
-                  <div className="lg:w-1/2">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center">
-                        <IconComponent className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-3xl font-bold text-gray-900">{program.title}</h3>
-                        <div className="text-emerald-600 font-semibold">{program.subtitle}</div>
-                      </div>
-                    </div>
-                    
-                    <p className="text-gray-700 text-lg leading-relaxed mb-6">{program.description}</p>
-                    
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                      {program.impact.map((item, idx) => (
-                        <div key={idx} className="bg-emerald-50 rounded-lg p-3 text-center">
-                          <div className="text-emerald-600 font-bold text-sm">{item}</div>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    <div className="flex flex-wrap items-center gap-4">
-                      {(program.id === 'green-dream' || program.id === 'jica-nfmp' || program.id === 'element') && (
-                        <button
-                          onClick={() => toggleExpanded(program.id)}
-                          className="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold transition-all duration-300"
-                        >
-                          {expandedProgram === program.id ? 'Read Less' : 'Read More'}
-                          {expandedProgram === program.id ? 
-                            <ChevronUp className="w-5 h-5" /> : 
-                            <ChevronDown className="w-5 h-5" />
-                          }
-                        </button>
-                      )}
-                      <Link
-                        to="/get-involved"
-                        className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
-                      >
-                        Support This Program <ArrowRight className="w-5 h-5" />
-                      </Link>
-                    </div>
 
-                    {/* Expanded Content for Green Dream Project */}
-                    {program.id === 'green-dream' && expandedProgram === 'green-dream' && (
+                  {/* Expanded Content for Green Dream Project */}
+                  {program.id === 'green-dream' && expandedProgram === 'green-dream' && (
                       <div className="mt-8 p-6 bg-gradient-to-r from-emerald-50 to-green-50 rounded-xl border-l-4 border-emerald-500 animate-in slide-in-from-top duration-300">
                         {/* External Link */}
                         <div className="mb-6">
@@ -680,8 +683,8 @@ const Programs = () => {
                       </div>
                     )}
 
-                    {/* Expanded Content for JICA NFMP Project */}
-                    {program.id === 'jica-nfmp' && expandedProgram === 'jica-nfmp' && (
+                  {/* Expanded Content for JICA NFMP Project */}
+                  {program.id === 'jica-nfmp' && expandedProgram === 'jica-nfmp' && (
                       <div className="mt-8 p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border-l-4 border-green-500 animate-in slide-in-from-top duration-300">
                         
                         {/* Batch Information */}
@@ -822,8 +825,8 @@ const Programs = () => {
                       </div>
                     )}
 
-                    {/* Expanded Content for ELEMENT World Bank Project */}
-                    {program.id === 'element' && expandedProgram === 'element' && (
+                  {/* Expanded Content for ELEMENT World Bank Project */}
+                  {program.id === 'element' && expandedProgram === 'element' && (
                       <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border-l-4 border-blue-500 animate-in slide-in-from-top duration-300">
                         
                         {/* Responsibilities */}
@@ -894,7 +897,6 @@ const Programs = () => {
                         </div>
                       </div>
                     )}
-                  </div>
                 </div>
               );
             })}
