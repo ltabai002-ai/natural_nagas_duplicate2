@@ -85,10 +85,10 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: 'url(https://drive.google.com/thumbnail?id=1vDma-gy0gBidu1SSZt7YY6CkAchL-6bX&sz=w1920)'
+            backgroundImage: 'url(/images/1.webp)'
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60"></div>
