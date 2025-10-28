@@ -131,7 +131,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">Our Conservation Impact</h2>
-            <p className="text-xl text-emerald-200">Making a difference across Nagaland since 2012</p>
+            <p className="text-xl text-emerald-200">Conserving the rich biodiversity of Nagaland since 2012</p>
           </div>
         </div>
       </section>
