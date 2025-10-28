@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { X, Play, Eye, Calendar } from 'lucide-react';
+import Lightbox from '../components/Lightbox';
 
 const Gallery = () => {
   const [selectedMedia, setSelectedMedia] = useState<any>(null);
   const [activeCategory, setActiveCategory] = useState('all');
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const photos = [
     {
@@ -135,13 +138,32 @@ const Gallery = () => {
     { id: 'conservation', label: 'Conservation', count: photos.filter(p => p.category === 'conservation').length }
   ];
 
-  const filteredPhotos = activeCategory === 'all' 
-    ? photos 
+  const filteredPhotos = activeCategory === 'all'
+    ? photos
     : photos.filter(photo => photo.category === activeCategory);
 
-  const filteredVideos = activeCategory === 'all' 
-    ? videos 
+  const filteredVideos = activeCategory === 'all'
+    ? videos
     : videos.filter(video => video.category === activeCategory);
+
+  const handleImageClick = (index: number) => {
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const handleLightboxClose = () => {
+    setLightboxOpen(false);
+  };
+
+  const handleLightboxNavigate = (index: number) => {
+    setCurrentImageIndex(index);
+  };
+
+  const lightboxImages = filteredPhotos.map(photo => ({
+    url: photo.image,
+    title: photo.title,
+    description: photo.description
+  }));
 
   return (
     <div className="min-h-screen bg-white">
@@ -183,13 +205,13 @@ const Gallery = () => {
             <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Photo Gallery</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredPhotos.map(photo => (
-                <div 
+              {filteredPhotos.map((photo, index) => (
+                <div
                   key={photo.id}
                   className="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500"
-                  onClick={() => setSelectedMedia(photo)}
+                  onClick={() => handleImageClick(index)}
                 >
-                  <img 
+                  <img
                     src={photo.image}
                     alt={photo.title}
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
@@ -254,8 +276,16 @@ const Gallery = () => {
         </section>
       )}
 
-      {/* Modal for Media Viewing */}
-      {selectedMedia && (
+      {lightboxOpen && (
+        <Lightbox
+          images={lightboxImages}
+          currentIndex={currentImageIndex}
+          onClose={handleLightboxClose}
+          onNavigate={handleLightboxNavigate}
+        />
+      )}
+
+      {selectedMedia && selectedMedia.duration && (
         <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-auto">
             <div className="relative">
@@ -265,29 +295,27 @@ const Gallery = () => {
               >
                 <X className="w-6 h-6" />
               </button>
-              
-              <img 
+
+              <img
                 src={selectedMedia.image || selectedMedia.thumbnail}
                 alt={selectedMedia.title}
                 className="w-full h-96 object-cover rounded-t-2xl"
               />
             </div>
-            
+
             <div className="p-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">{selectedMedia.title}</h3>
               <p className="text-gray-700 leading-relaxed">{selectedMedia.description}</p>
-              
-              {selectedMedia.duration && (
-                <div className="mt-6 flex items-center gap-4">
-                  <div className="flex items-center gap-2 text-gray-600">
-                    <Play className="w-5 h-5" />
-                    <span>Duration: {selectedMedia.duration}</span>
-                  </div>
-                  <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-300">
-                    Watch Full Video
-                  </button>
+
+              <div className="mt-6 flex items-center gap-4">
+                <div className="flex items-center gap-2 text-gray-600">
+                  <Play className="w-5 h-5" />
+                  <span>Duration: {selectedMedia.duration}</span>
                 </div>
-              )}
+                <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-300">
+                  Watch Full Video
+                </button>
+              </div>
             </div>
           </div>
         </div>

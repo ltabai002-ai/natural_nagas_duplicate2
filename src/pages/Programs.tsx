@@ -1,12 +1,30 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Bird, Trees, GanttChart as Elephant, Users, Award, MapPin, Calendar, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
+import Lightbox from '../components/Lightbox';
 
 const Programs = () => {
   const [expandedProgram, setExpandedProgram] = useState<string | null>(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentGallery, setCurrentGallery] = useState<Array<{url: string; title: string; description: string}>>([]);
 
   const toggleExpanded = (programId: string) => {
     setExpandedProgram(expandedProgram === programId ? null : programId);
+  };
+
+  const openLightbox = (gallery: Array<{url: string; title: string; description: string}>, index: number) => {
+    setCurrentGallery(gallery);
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+  };
+
+  const navigateLightbox = (index: number) => {
+    setCurrentImageIndex(index);
   };
 
   // Chunglikha Visit Photo Gallery
@@ -595,7 +613,11 @@ const Programs = () => {
                           </h4>
                           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {chunglikhaPhotos.map((photo, idx) => (
-                              <div key={idx} className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300">
+                              <div
+                                key={idx}
+                                className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300 cursor-pointer"
+                                onClick={() => openLightbox(chunglikhaPhotos, idx)}
+                              >
                                 <div className="relative h-48 overflow-hidden">
                                   <img
                                     src={photo.url}
@@ -630,7 +652,11 @@ const Programs = () => {
                             
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                               {gdpActivityPhotos.map((photo, idx) => (
-                                <div key={idx} className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300">
+                                <div
+                                  key={idx}
+                                  className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300 cursor-pointer"
+                                  onClick={() => openLightbox(gdpActivityPhotos, idx)}
+                                >
                                   <div className="relative h-48 overflow-hidden">
                                     <img
                                       src={photo.url}
@@ -659,7 +685,11 @@ const Programs = () => {
                           
                           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {waterTableRechargePhotos.map((photo, idx) => (
-                              <div key={idx} className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300">
+                              <div
+                                key={idx}
+                                className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300 cursor-pointer"
+                                onClick={() => openLightbox(waterTableRechargePhotos, idx)}
+                              >
                                 <div className="relative h-48 overflow-hidden">
                                   <img
                                     src={photo.url}
@@ -1024,7 +1054,11 @@ const Programs = () => {
                           
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {amurFalconMouPhotos.map((photo, idx) => (
-                              <div key={idx} className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300">
+                              <div
+                                key={idx}
+                                className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300 cursor-pointer"
+                                onClick={() => openLightbox(amurFalconMouPhotos, idx)}
+                              >
                                 <div className="relative h-48 overflow-hidden">
                                   <img
                                     src={photo.url}
@@ -1059,7 +1093,11 @@ const Programs = () => {
                           
                           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {birdForBirdPhotos.map((photo, idx) => (
-                              <div key={idx} className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300">
+                              <div
+                                key={idx}
+                                className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300 cursor-pointer"
+                                onClick={() => openLightbox(birdForBirdPhotos, idx)}
+                              >
                                 <div className="relative h-48 overflow-hidden">
                                   <img
                                     src={photo.url}
@@ -1094,7 +1132,11 @@ const Programs = () => {
                           
                           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {patrollingSquadPhotos.map((photo, idx) => (
-                              <div key={idx} className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300">
+                              <div
+                                key={idx}
+                                className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-all duration-300 cursor-pointer"
+                                onClick={() => openLightbox(patrollingSquadPhotos, idx)}
+                              >
                                 <div className="relative h-48 overflow-hidden">
                                   <img
                                     src={photo.url}
@@ -1361,6 +1403,15 @@ const Programs = () => {
           </Link>
         </div>
       </section>
+
+      {lightboxOpen && (
+        <Lightbox
+          images={currentGallery}
+          currentIndex={currentImageIndex}
+          onClose={closeLightbox}
+          onNavigate={navigateLightbox}
+        />
+      )}
     </div>
   );
 };
