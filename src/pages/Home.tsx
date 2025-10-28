@@ -133,21 +133,6 @@ const Home = () => {
             <h2 className="text-4xl font-bold mb-4">Our Conservation Impact</h2>
             <p className="text-xl text-emerald-200">Making a difference across Nagaland since 2012</p>
           </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {impactStats.map((stat, index) => {
-              const IconComponent = stat.icon;
-              return (
-                <div key={index} className="text-center group">
-                  <div className="w-20 h-20 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-emerald-500 transition-colors duration-300">
-                    <IconComponent className="w-10 h-10" />
-                  </div>
-                  <div className="text-4xl font-bold text-emerald-400 mb-2">{stat.number}</div>
-                  <div className="text-emerald-200 font-medium">{stat.label}</div>
-                </div>
-              );
-            })}
-          </div>
         </div>
       </section>
 
