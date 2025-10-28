@@ -105,12 +105,6 @@ const Home = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
-              to="/get-involved"
-              className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
-            >
-              Donate Now
-            </Link>
-            <Link
               to="/programs"
               className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border border-white/30 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300"
             >
