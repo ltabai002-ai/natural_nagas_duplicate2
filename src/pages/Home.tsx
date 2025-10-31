@@ -99,10 +99,7 @@ const Home = () => {
             Natural Nagas
             <span className="block text-emerald-400">Conservation Initiative</span>
           </h1>
-          <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto">
-            Founded in 2012 in Wokha, Nagaland. From Amur Falcon protection to community-based conservation across 40+ villages.
-          </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
               to="/programs"
