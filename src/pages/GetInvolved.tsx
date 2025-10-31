@@ -62,43 +62,6 @@ const GetInvolved = () => {
   ];
   */
 
-  const partnershipTiers = [
-    {
-      title: 'Conservation Champion',
-      amount: '₹1,00,000+',
-      benefits: [
-        'Annual impact report with detailed metrics',
-        'Site visits and field trip opportunities',
-        'Recognition on website and annual report',
-        'Quarterly progress updates',
-        'Involvement in program planning'
-      ],
-      color: 'emerald'
-    },
-    {
-      title: 'Wildlife Protector',
-      amount: '₹50,000+',
-      benefits: [
-        'Bi-annual impact reports',
-        'Recognition on website',
-        'Quarterly updates via email',
-        'Invitation to annual events'
-      ],
-      color: 'blue'
-    },
-    {
-      title: 'Community Supporter',
-      amount: '₹25,000+',
-      benefits: [
-        'Annual impact summary',
-        'Website acknowledgment',
-        'Regular email updates',
-        'Event invitations'
-      ],
-      color: 'green'
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-white">
       {/* Hero */}
@@ -328,84 +291,6 @@ const GetInvolved = () => {
         </div>
       </section>
       */}
-
-      {/* Partnership Section */}
-      <section id="partnership" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Partnership Opportunities</h2>
-            <p className="text-xl text-gray-600">Collaborate with us for greater conservation impact</p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            {partnershipTiers.map((tier, index) => (
-              <div key={index} className={`bg-white rounded-xl shadow-lg p-8 relative overflow-hidden group hover:shadow-xl transition-all duration-500`}>
-                <div className={`absolute top-0 left-0 right-0 h-2 bg-gradient-to-r ${
-                  tier.color === 'emerald' ? 'from-emerald-400 to-emerald-600' :
-                  tier.color === 'blue' ? 'from-blue-400 to-blue-600' :
-                  'from-green-400 to-green-600'
-                }`}></div>
-                
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{tier.title}</h3>
-                  <div className="text-3xl font-bold text-emerald-600">{tier.amount}</div>
-                  <div className="text-gray-600">Annual Partnership</div>
-                </div>
-                
-                <div className="space-y-3 mb-8">
-                  {tier.benefits.map((benefit, idx) => (
-                    <div key={idx} className="flex items-start gap-3">
-                      <ArrowRight className="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700">{benefit}</span>
-                    </div>
-                  ))}
-                </div>
-                
-                <button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-lg font-semibold transition-colors duration-300">
-                  Become a Partner
-                </button>
-              </div>
-            ))}
-          </div>
-
-          {/* Custom Partnership */}
-          <div className="bg-white rounded-xl shadow-lg p-8 text-center">
-            <div className="max-w-2xl mx-auto">
-              <Handshake className="w-16 h-16 text-emerald-600 mx-auto mb-6" />
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">Custom Partnership</h3>
-              <p className="text-lg text-gray-700 mb-8">
-                Looking for a tailored partnership opportunity? We work with organizations of all sizes 
-                to create custom collaboration agreements that align with your CSR goals and our conservation mission.
-              </p>
-              
-              <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <div className="text-left">
-                  <h4 className="font-semibold text-gray-900 mb-3">Partnership Types:</h4>
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• Program-specific funding</li>
-                    <li>• Research collaborations</li>
-                    <li>• Employee engagement programs</li>
-                    <li>• Technology partnerships</li>
-                  </ul>
-                </div>
-                <div className="text-left">
-                  <h4 className="font-semibold text-gray-900 mb-3">Benefits Include:</h4>
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• CSR impact documentation</li>
-                    <li>• Brand visibility opportunities</li>
-                    <li>• Employee engagement activities</li>
-                    <li>• Sustainability reporting support</li>
-                  </ul>
-                </div>
-              </div>
-              
-              <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105">
-                Discuss Partnership
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Contact Information */}
       <section className="py-16 bg-emerald-600 text-white">
