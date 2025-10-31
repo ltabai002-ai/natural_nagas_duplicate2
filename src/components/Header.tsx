@@ -53,12 +53,12 @@ const Header = () => {
               </Link>
             ))}
             
-            {/* Donate Button */}
+            {/* Quick Contact Button */}
             <Link
-              to="/get-involved"
+              to="/contact"
               className="bg-emerald-600 text-white px-6 py-2 rounded-lg hover:bg-emerald-700 transition-colors duration-200 font-medium"
             >
-              Donate Now
+              Quick Contact
             </Link>
           </nav>
 
@@ -89,11 +89,11 @@ const Header = () => {
                 </Link>
               ))}
               <Link
-                to="/get-involved"
+                to="/contact"
                 className="block bg-emerald-600 text-white px-6 py-2 rounded-lg hover:bg-emerald-700 transition-colors duration-200 font-medium text-center"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Donate Now
+                Quick Contact
               </Link>
             </nav>
           </div>
