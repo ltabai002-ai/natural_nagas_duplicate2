@@ -60,6 +60,16 @@ const Gallery = () => {
               url: '/images/chunglikha-visit/_MG_8354.webp',
               title: 'Forest Path Documentation',
               description: 'Team documenting conservation areas and natural pathways through forested village areas'
+            },
+            {
+              url: '/images/chunglikha-visit/IMG_3238.webp',
+              title: 'Community Leader Presentation',
+              description: 'Village leader presenting statistics and council information with community representatives'
+            },
+            {
+              url: '/images/chunglikha-visit/IMG_3169.webp',
+              title: 'Waste Management Initiative',
+              description: 'Traditional basket collection system used for community cleanliness and waste management drive'
             }
           ]
         },
