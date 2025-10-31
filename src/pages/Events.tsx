@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, MapPin, Users, ArrowRight, ExternalLink, Award, GanttChart as Elephant, ChevronDown, ChevronUp, Leaf, Trees, Globe, Recycle, Heart } from 'lucide-react';
+import Lightbox from '../components/Lightbox';
 
 const Events = () => {
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   const toggleExpanded = (sectionId: string) => {
     setExpandedSection(expandedSection === sectionId ? null : sectionId);
+  };
+
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
   };
 
   // Helper function to convert Google Drive URLs to thumbnail URLs
@@ -288,33 +300,25 @@ const Events = () => {
 
           {/* Dhandeli Karnataka Gallery */}
           <div className="mt-16">
-            <div className="flex items-center justify-between mb-8">
+            <div className="mb-8">
               <h3 className="text-2xl font-bold text-gray-900">Dhandeli Karnataka Training and Exposure Trip</h3>
-              <button
-                onClick={() => toggleExpanded('dhandeli')}
-                className="flex items-center gap-2 text-emerald-600 font-semibold hover:text-emerald-700 transition-colors duration-300"
-              >
-                {expandedSection === 'dhandeli' ? (
-                  <>Hide Gallery <ChevronUp className="w-4 h-4" /></>
-                ) : (
-                  <>View Gallery <ChevronDown className="w-4 h-4" /></>
-                )}
-              </button>
             </div>
-            
-            {expandedSection === 'dhandeli' && (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                {dhandeliImages.map((imageUrl, index) => (
-                  <div key={index} className="aspect-square bg-gray-100 rounded-lg overflow-hidden group">
-                    <img
-                      src={getGoogleDriveImageUrl(imageUrl, 'w400')}
-                      alt={`Dhandeli Karnataka Training ${index + 1}`}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              {dhandeliImages.map((imageUrl, index) => (
+                <div
+                  key={index}
+                  className="aspect-square bg-gray-100 rounded-lg overflow-hidden group cursor-pointer"
+                  onClick={() => openLightbox(index)}
+                >
+                  <img
+                    src={getGoogleDriveImageUrl(imageUrl, 'w400')}
+                    alt={`Dhandeli Karnataka Training ${index + 1}`}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -673,6 +677,20 @@ const Events = () => {
           </div>
         </div>
       </section>
+
+      {/* Lightbox Component */}
+      {lightboxOpen && (
+        <Lightbox
+          images={dhandeliImages.map((url, idx) => ({
+            url: getGoogleDriveImageUrl(url, 'w1200'),
+            title: `Dhandeli Karnataka Training ${idx + 1}`,
+            description: 'Training and exposure trip activities at Dhandeli, Karnataka'
+          }))}
+          currentIndex={lightboxIndex}
+          onClose={closeLightbox}
+          onNavigate={setLightboxIndex}
+        />
+      )}
     </div>
   );
 };
