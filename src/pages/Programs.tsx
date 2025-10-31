@@ -30,34 +30,24 @@ const Programs = () => {
   // Chunglikha Visit Photo Gallery
   const chunglikhaPhotos = [
     {
-      url: 'https://page.gensparksite.com/v1/base64_upload/047ead02b15cae824119ff2fc3cd6a82',
-      title: 'IMG_3238 - Community Meeting Discussion',
-      description: 'Community leaders presenting village statistics and council information'
+      url: '/images/chunglikha-visit/_MG_8303.webp',
+      title: 'Community Assembly Hall Meeting',
+      description: 'Community members gathered inside Chunglikha Community Hall for environmental awareness session'
     },
     {
-      url: 'https://page.gensparksite.com/v1/base64_upload/8e5b3b16bed476c73613db5fcf01097d',
-      title: '_MG_8303 - Village Assembly Hall',
-      description: 'Community members gathered for environmental awareness session'
+      url: '/images/chunglikha-visit/_MG_8378.webp',
+      title: 'Group Photo at Chunglikha Community Hall',
+      description: 'Team and village representatives at Chunglikha Community Hall showcasing community partnership'
     },
     {
-      url: 'https://page.gensparksite.com/v1/base64_upload/9e378ef3ee0e45cfc9bb9bdf76b2b1c8',
-      title: '_MG_8378 - Waste Management Initiative',
-      description: 'Traditional basket used for community cleanliness drive'
+      url: '/images/chunglikha-visit/_MG_8322.webp',
+      title: 'Community Village Walk',
+      description: 'Team and community members walking through village areas and green spaces during site visit'
     },
     {
-      url: 'https://page.gensparksite.com/v1/base64_upload/9ed8edae8aad414b1d8beb94c64288d7',
-      title: '_MG_8322 - Forest Path Inspection',
-      description: 'Team documenting conservation areas and natural pathways'
-    },
-    {
-      url: 'https://page.gensparksite.com/v1/base64_upload/bb538e85d5e6cceacf378ada55ee82ac',
-      title: '_MG_8354 - Village Area Survey',
-      description: 'Community visit through village areas and green spaces'
-    },
-    {
-      url: 'https://page.gensparksite.com/v1/base64_upload/b82e7f041821cbfe34bd4df9540651d9',
-      title: 'IMG_3169 - Chunglikha Community Hall',
-      description: 'Group photo at Chunglikha Community Hall with village representatives'
+      url: '/images/chunglikha-visit/_MG_8354.webp',
+      title: 'Forest Path Documentation',
+      description: 'Team documenting conservation areas and natural pathways through forested village areas'
     }
   ];
 
