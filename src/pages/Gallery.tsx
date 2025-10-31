@@ -220,6 +220,11 @@ const Gallery = () => {
               url: '/images/gdp-activities/photo_15.jpg',
               title: 'GDP Activity Photo 15',
               description: 'Green village development model implementation and monitoring'
+            },
+            {
+              url: '/images/gdp-activities/ecotourism workshop on homestays.webp',
+              title: 'Ecotourism Workshop on Homestays',
+              description: 'Community workshop promoting sustainable ecotourism through homestay development and local participation'
             }
           ]
         },
