@@ -19,7 +19,6 @@ const Header = () => {
     { path: '/impact', label: 'Impact' },
     { path: '/gallery', label: 'Gallery' },
     { path: '/get-involved', label: 'Get Involved' },
-    { path: '/contact', label: 'Contact' },
   ];
 
   return (
