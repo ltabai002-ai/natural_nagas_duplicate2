@@ -7,13 +7,15 @@ const Events = () => {
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [currentGallery, setCurrentGallery] = useState<'dhandeli' | 'plantation'>('dhandeli');
 
   const toggleExpanded = (sectionId: string) => {
     setExpandedSection(expandedSection === sectionId ? null : sectionId);
   };
 
-  const openLightbox = (index: number) => {
+  const openLightbox = (index: number, gallery: 'dhandeli' | 'plantation' = 'dhandeli') => {
     setLightboxIndex(index);
+    setCurrentGallery(gallery);
     setLightboxOpen(true);
   };
 
@@ -671,11 +673,19 @@ const Events = () => {
       {/* Lightbox Component */}
       {lightboxOpen && (
         <Lightbox
-          images={dhandeliImages.map((url, idx) => ({
-            url: getGoogleDriveImageUrl(url, 'w1200'),
-            title: `Dhandeli Karnataka Training ${idx + 1}`,
-            description: 'Training and exposure trip activities at Dhandeli, Karnataka'
-          }))}
+          images={
+            currentGallery === 'plantation'
+              ? plantationImages.map((url, idx) => ({
+                  url: getGoogleDriveImageUrl(url, 'w1200'),
+                  title: `Plantation Drive ${idx + 1}`,
+                  description: '500 saplings of Rhododendron Arboreum at Mt. Tiyi with Wokha Village Council'
+                }))
+              : dhandeliImages.map((url, idx) => ({
+                  url: getGoogleDriveImageUrl(url, 'w1200'),
+                  title: `Dhandeli Karnataka Training ${idx + 1}`,
+                  description: 'Training and exposure trip activities at Dhandeli, Karnataka'
+                }))
+          }
           currentIndex={lightboxIndex}
           onClose={closeLightbox}
           onNavigate={setLightboxIndex}
