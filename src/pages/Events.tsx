@@ -619,36 +619,26 @@ const Events = () => {
 
           {/* Plantation Drives Gallery */}
           <div className="mt-16">
-            <div className="flex items-center justify-between mb-8">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-900">Plantation Drives</h3>
-                <p className="text-gray-600">500 saplings of Rhododendron Arboreum at Mt. Tiyi with Wokha Village Council</p>
-              </div>
-              <button
-                onClick={() => toggleExpanded('plantation')}
-                className="flex items-center gap-2 text-emerald-600 font-semibold hover:text-emerald-700 transition-colors duration-300"
-              >
-                {expandedSection === 'plantation' ? (
-                  <>Hide Gallery <ChevronUp className="w-4 h-4" /></>
-                ) : (
-                  <>View Gallery <ChevronDown className="w-4 h-4" /></>
-                )}
-              </button>
+            <div className="mb-8">
+              <h3 className="text-2xl font-bold text-gray-900">Plantation Drives</h3>
+              <p className="text-gray-600">500 saplings of Rhododendron Arboreum at Mt. Tiyi with Wokha Village Council</p>
             </div>
-            
-            {expandedSection === 'plantation' && (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                {plantationImages.map((imageUrl, index) => (
-                  <div key={index} className="aspect-square bg-gray-100 rounded-lg overflow-hidden group">
-                    <img
-                      src={getGoogleDriveImageUrl(imageUrl, 'w400')}
-                      alt={`Plantation Drive ${index + 1}`}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {plantationImages.map((imageUrl, index) => (
+                <div
+                  key={index}
+                  className="aspect-square bg-gray-100 rounded-lg overflow-hidden group cursor-pointer"
+                  onClick={() => openLightbox(index, 'plantation')}
+                >
+                  <img
+                    src={getGoogleDriveImageUrl(imageUrl, 'w400')}
+                    alt={`Plantation Drive ${index + 1}`}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
